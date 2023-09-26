@@ -1,3 +1,4 @@
+import 'package:accessible_ui_app/app/module/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,11 +11,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+      home: HomePage(),
     );
   }
 }
