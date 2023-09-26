@@ -1,3 +1,3 @@
-# accessible_ui_app
+# Accessible UI APP
 
-A new Flutter project.
+![App UI example](image.png)
