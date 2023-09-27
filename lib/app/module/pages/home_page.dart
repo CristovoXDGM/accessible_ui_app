@@ -5,6 +5,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final objectsList = List.generate(
+      6,
+      (index) => {
+        'title': "Title $index",
+        "sub_title": "subtitle $index",
+        "selected": false,
+      },
+    );
+
+    final contentList = ValueNotifier(objectsList);
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -23,7 +34,7 @@ class HomePage extends StatelessWidget {
             const Text("Titulo"),
             Flexible(
               child: ListView.builder(
-                  itemCount: 6,
+                  itemCount: contentList.value.length,
                   itemBuilder: (context, index) {
                     return Dismissible(
                       background: Container(
@@ -44,14 +55,25 @@ class HomePage extends StatelessWidget {
                         child: const Text('Done'),
                       ),
                       key: Key('$index'),
-                      child: ListTile(
-                        title: const Text('teste'),
-                        subtitle: const Text("testand subtitulo"),
-                        leading: Checkbox.adaptive(
-                          value: true,
-                          onChanged: (onChanged) {},
-                        ),
-                      ),
+                      child: ValueListenableBuilder(
+                          valueListenable: contentList,
+                          builder: (context, list, child) {
+                            final map = list[index];
+
+                            return ListTile(
+                              title: Text("${map['title']}"),
+                              subtitle: Text("${map['sub_title']}"),
+                              trailing: const Icon(Icons.today_outlined),
+                              leading: Checkbox.adaptive(
+                                value: map['selected'] as bool,
+                                onChanged: (onchange) {
+                                  map['selected'] = onchange!;
+
+                                  contentList.value = List.from(list);
+                                },
+                              ),
+                            );
+                          }),
                     );
                   }),
             )
