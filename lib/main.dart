@@ -1,4 +1,4 @@
-import 'package:accessible_ui_app/app/module/pages/home_page.dart';
+import 'package:accessible_ui_app/app/module/todo_list/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
